@@ -1,6 +1,6 @@
 var fin="https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/p2data/data1.tsv";
 var times=[],dataRainfall=[],dataGndWater=[],dataDist=[],accu24Rain=[];//array
-var objRainfall=[], objGndWater=[], objDist=[],accu24RainObj=[];//e.g. {cdate: 2012/6/5 0:00,val:-55}
+var objRainfall=[], objGndWater=[], objDist=[],accu24RainObj=[],dataAllObj=[];//e.g. {cdate: 2012/6/5 0:00,val:-55}
 var dateformat=d3.time.format("%Y/%m/%d %H:%M");
 var labelDateFormat=d3.time.format("%Y/%m/%d ");
 var weekday = new Array(7);
@@ -64,8 +64,9 @@ function parseData(){
 			objDist.push({cdate:tTmp,val:parseFloat(data3)});
 		}
 		accu24Rain=accuToAccu24h(dataRainfall);
-    	for(var i=0;i<accu24Rain.length;i++){
+    	for(var i=0;i<times.length;i++){
     		accu24RainObj.push({cdate:times[i],val:accu24Rain[i]});
+    		dataAllObj.push({cdate:times[i],rainfall:accu24Rain[i],gndWater:dataGndWater[i],gpsDist:dataDist[i]});
     	}
     	draw();//in chartFcn.js
 	});

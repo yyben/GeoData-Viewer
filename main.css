@@ -1,0 +1,61 @@
+ body{
+        font-family:sans-serif;
+    }
+    .axis path, line{
+        stroke:#E8E8E8;
+    }
+	.axis text {
+		fill: dimgray;
+		font: 12px sans-serif;
+	}
+	.axis1 path, line{
+        stroke:lightgrey;
+    }
+	.axis1 text {
+		fill: dimgrey;
+		font: 12px sans-serif;
+	}
+	.light circle{
+		stroke:dimgrey;
+		stroke-width: 5px;
+	}
+		
+    .lineChart path{
+        stroke-width:3px;
+    }
+	    
+   
+	
+	.line {
+        stroke:#FFD700;
+    }
+	
+	.line2 {
+        stroke:#E55451;
+    }
+	
+	.line3 {
+        stroke:#E8E8E8;
+    }
+	
+	path { 
+    	stroke: steelblue;
+    	stroke-width: 2;
+    	fill: none;
+	}
+    path.area {
+    	stroke: none;
+    	stroke-width: 2;
+    	fill: #F1F1F2;
+    }
+    .focus circle {
+		fill: none;
+		stroke: steelblue;
+	}
+	.overlay {
+		fill: none;
+		pointer-events: all;
+	}
+	.container {
+		float: left;
+	}
