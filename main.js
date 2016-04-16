@@ -69,6 +69,8 @@ function parseData(){
     		dataAllObj.push({cdate:times[i],rainfall:accu24Rain[i],gndWater:dataGndWater[i],gpsDist:dataDist[i]});
     	}
     	draw();//in chartFcn.js
+    	drawClock();
+    	
 	});
 }
 function accuToAccu24h(d){
