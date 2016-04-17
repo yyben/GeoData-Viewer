@@ -48,10 +48,6 @@ function draw(){
 		.tickSize(-height)
 		.tickSubdivide(true);
 
-	// var time_axis2 = d3.svg.axis()	// axis for range slider
-	// 	.scale(time_scale2)
-	// 	.orient('bottom');
-
 	var rainfall_axis = d3.svg.axis()
 		.scale(rainfall_scale)
 		.orient("left")
@@ -81,8 +77,6 @@ function draw(){
 
     time_scale.domain(d3.extent(dataAllObj, function(d){ return d.cdate;}));
 
-    //time_scale2.domain(time_scale.domain());
-
     // light sign
 
     var light_sign = d3.select("#IndicatorChart")
@@ -92,189 +86,6 @@ function draw(){
 
 	var time_height = 30;
 	var format_time = d3.time.format("%Y-%m-%d %H:%M");
-
-	// var show_time = light_sign
-	// 	.append("g")
-	// 	.attr("transform", "translate(" + (width1/2+20) + "," + time_height + ")")
-	// 	.append("text")
-	// 	.attr("stroke", "#686868")
-	// 	.attr("fill", "#686868")
-	// 	.attr("font-size", "18px")
-	// 	.attr("text-anchor", "middle")
-	// 	.text("time");
-		
-	// var light1 = light_sign
-	// 	.append("g")
-	// 	.attr("transform", "translate(" + (margin.left-40) + "," + (margin.top+time_height) + ")");
-		
-	
-	
-	// var r1 = light1
-	// 	.append("g")
-	// 	.attr("transform", "translate(" +(margin.left -10) + "," + margin.top + ")");
-	
-	// r1.append("rect")
-	// 	.attr("x", 0)
-	// 	.attr("y", 0)
-	// 	.attr("width", width1-110)
-	// 	.attr("height", height-50)
-	// 	.attr("rx", 20)
-	// 	.attr("ry", 20)
-	// 	.attr("stroke", "#F8F8F8")
-	// 	.attr("stroke-width", "5px")
-	// 	.attr("fill", "#F8F8F8");
-		
-	// r1.append("text")
-	// 	.attr("x", 78)
-	// 	.attr("y", 43)
-	// 	.attr("fill", "dimgray")
-	// 	.attr("class", "light")
-	// 	.attr("font-size", "25px")
-	// 	.text("Rainfall");
-		
-	// r1.append("text")
-	// 	.attr("x", 63)
-	// 	.attr("y", 58)
-	// 	.attr("fill", "#888888")
-	// 	.attr("font-size", "15px")
-	// 	.text("cumulative in 24 hr");
-		
-	// r1.append("circle")
-	// 	.attr("cx",30)
-	// 	.attr("cy", 53)
-	// 	.attr("r", 20)
-	// 	.attr("stroke", "#B0B0B0")
-	// 	.attr("stroke-width", "5px");
-		
-	// var caution1 = r1.append("text")
-	// 	.attr("x", 30)
-	// 	.attr("y", 53)
-	// 	.attr("dy", 8)
-	// 	.attr("stroke", "White")
-	// 	.attr("fill", "White")
-	// 	.attr("font-size", "23px")
-	// 	.attr("text-anchor", "middle");
-		
-	// var textData1 = r1.append("text")
-	// 	.attr("x", 119)
-	// 	.attr("y", 68)
-	// 	.attr("dy", 8)
-	// 	.attr("fill", "#686868")
-	// 	.attr("font-size", "18px")
-	// 	.attr("text-anchor", "middle");
-
-	// var light2 = light_sign
-	// 	.append("g")
-	// 	.attr("transform", "translate(" + (margin.left-40) + "," + (margin.top+time_height) + ")");
-	
-	// var r2 = light2
-	// 	.append("g")
-	// 	.attr("transform", "translate(" +(margin.left -10) + "," + margin.top + ")");
-	
-	// r2.append("rect")
-	// 	.attr("x", 0)
-	// 	.attr("y", 180)
-	// 	.attr("width", width1-110)
-	// 	.attr("height", height-50)
-	// 	.attr("rx", 20)
-	// 	.attr("ry", 20)
-	// 	.attr("stroke", "#F8F8F8")
-	// 	.attr("stroke-width", "5px")
-	// 	.attr("fill", "#F8F8F8");
-		
-	// r2.append("text")
-	// 	.attr("x", 57)
-	// 	.attr("y", 220)
-	// 	.attr("fill", "dimgray")
-	// 	.attr("font-size", "20px")
-	// 	.text("Displacement");
-	
-	// r2.append("text")
-	// 	.attr("x", 88)
-	// 	.attr("y", 236)
-	// 	.attr("fill", "#888888")
-	// 	.attr("font-size", "15px")
-	// 	.text("of stratum");
-		
-	// r2.append("circle")
-	// 	.attr("cx",30)
-	// 	.attr("cy", 233)
-	// 	.attr("r", 20)
-	// 	.attr("stroke", "#B0B0B0")
-	// 	.attr("stroke-width", "5px");
-		
-	// var caution2 = r2.append("text")
-	// 	.attr("x", 30)
-	// 	.attr("y", 233)
-	// 	.attr("dy", 8)
-	// 	.attr("stroke", "White")
-	// 	.attr("fill", "White")
-	// 	.attr("font-size", "23px")
-	// 	.attr("text-anchor", "middle");
-					
-	// var textData2 = r2.append("text")
-	// 	.attr("x", 88)
-	// 	.attr("y", 247)
-	// 	.attr("dy", 8)
-	// 	.attr("fill", "#686868")
-	// 	.attr("font-size", "18px");
-
-	// var light3 = light_sign
-	// 	.append("g")
-	// 	.attr("transform", "translate(" + (margin.left-40) + "," + (margin.top+time_height) + ")");
-	
-	// var r3 = light3
-	// 	.append("g")
-	// 	.attr("transform", "translate(" +(margin.left -10) + "," + margin.top + ")");
-	
-	// r3.append("rect")
-	// 	.attr("x", 0)
-	// 	.attr("y", 360)
-	// 	.attr("width", width1-110)
-	// 	.attr("height", height-50)
-	// 	.attr("rx", 20)
-	// 	.attr("ry", 20)
-	// 	.attr("stroke", "#F8F8F8")
-	// 	.attr("stroke-width", "5px")
-	// 	.attr("fill", "#F8F8F8");
-		
-	// r3.append("text")
-	// 	.attr("x", 86)
-	// 	.attr("y", 404)
-	// 	.attr("fill", "dimgray")
-	// 	.attr("font-size", "25px")
-	// 	.text("Level");
-
-	// r3.append("text")
-	// 	.attr("x", 66)
-	// 	.attr("y", 418)
-	// 	.attr("fill", "#888888")
-	// 	.attr("font-size", "15px")
-	// 	.text("of ground water");
-		
-	// r3.append("circle")
-	// 	.attr("cx",30)
-	// 	.attr("cy", 413)
-	// 	.attr("r", 20)
-	// 	.attr("stroke", "#B0B0B0")
-	// 	.attr("stroke-width", "5px");
-		
-	// var caution3 = r3.append("text")
-	// 	.attr("x", 30)
-	// 	.attr("y", 413)
-	// 	.attr("dy", 8)
-	// 	.attr("stroke", "White")
-	// 	.attr("fill", "White")
-	// 	.attr("font-size", "23px")
-	// 	.attr("text-anchor", "middle");
-					
-	// var textData3 = r3.append("text")
-	// 	.attr("x", 116)
-	// 	.attr("y", 430)
-	// 	.attr("dy", 8)
-	// 	.attr("fill", "#686868")
-	// 	.attr("font-size", "18px")
-	// 	.attr("text-anchor", "middle");
 	
 	//Chart 1 
 	// draw axes
@@ -430,40 +241,19 @@ function draw(){
 		.attr("class", "overlay")
 		.attr("width", width2)
 		.attr("height", 3*height + 2*margin.bottom)
-		.on("mouseover", mouseover)
-		.on("mouseout", mouseout)
+		.on("click", mouseclick)
 		.on("mousemove", mousemove);
+
+	function mouseclick(){
+		var x0 = time_scale.invert(d3.mouse(this)[0]),
+			i = bisectTime(dataAllObj, x0, 1);
+		console.log(x0);
+		console.log(i);
+		console.log(dataAllObj[i-1].cdate);
+		var d=dataAllObj[i-1];
+		drawDataPanel(d);
+	}
 	
-	function mouseover() {
-		focus1.style("display", null); 
-		focus2.style("display", null); 
-		focus3.style("display", null);
-
-		// light1.attr("fill", "#F8F8F8");
-		// textData1.text(" ");
-
-		// light2.attr("fill", "#F8F8F8");
-		// textData2.text(" ");
-
-		// light3.attr("fill", "#F8F8F8");
-		// textData3.text(" ");
-	}	
-
-	function mouseout() {
-		focus1.style("display", "none"); 
-		focus2.style("display", "none"); 
-		focus3.style("display", "none");
-
-		// light1.attr("fill", "#F8F8F8");
-		// textData1.text(" ");
-
-		// light2.attr("fill", "#F8F8F8");
-		// textData2.text(" ");
-
-		// light3.attr("fill", "#F8F8F8");
-		// textData3.text(" ");
-	}	
-
 	function mousemove() {
 		var x0 = time_scale.invert(d3.mouse(this)[0]),
 			i = bisectTime(dataAllObj, x0, 1);
@@ -489,119 +279,11 @@ function draw(){
 		focus3.attr("transform", "translate(" + time_scale(d.cdate) + "," + level_scale(d.gndWater) + ")")
 			 .attr("r", 5).attr("fill", pColor);
 		focus3.select("text").text(formatCurrency(d.gndWater));
-
-		//show_time.text(format_time(d.cdate));
-	    
 	    
 	    updateData(d.cdate);
 		moveHands();
 
-		// light1.attr("fill", function() {
-		// 	var fillcolor;
-		// 	if (d.rainfall > 500) { fillcolor = "red"; caution1.text("!!");} 
-		// 	else if (d.rainfall > 200) { fillcolor = "#FDD017"; caution1.text("!");} 
-		// 	else { fillcolor = "#4CC417";caution1.text(" ");}					
-		// 	return fillcolor;
-		// });
-		
-		// textData1.text(formatValue(d.rainfall) + " mm");
-	
-
-		// light2.attr("fill", function() {
-		// 	var fillcolor;
-		// 	if (d.gpsDist > 2) { fillcolor = "red"; caution2.text("!!");} 
-		// 	else if (d.gpsDist > 0.5) { fillcolor = "#FDD017"; caution2.text("!");} 
-		// 	else { fillcolor = "#4CC417";caution2.text(" ");}					
-		// 	return fillcolor;
-		// });
-		// textData2.text(formatValue(d.gpsDist) + " cm");
-
-		// light3.attr("fill", function() {
-		// 	var fillcolor;
-		// 	if (d.gndWater > -35) { fillcolor = "red"; caution3.text("!!");} 
-		// 	else if (d.gndWater > -42) { fillcolor = "#FDD017"; caution3.text("!");} 
-		// 	else { fillcolor = "#4CC417";caution3.text(" ");}					
-		// 	return fillcolor;
-		// });
-		// textData3.text(formatValue(d.gndWater) + " m");
-	}
-
-	// brush range slider
-
-	// var context = svg.append("g")
-	// 	.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + 3*(height + 30) + time_height) + ")" )
-	// 	.attr("class", "context");
-
-	// g1.append("defs")
-	// 	.append("clipPath")
-	// 		.attr("id", "clip")
-	// 		.append("rect")
-	// 		.attr("width", width2-margin.left-margin.right)
-	// 		.attr("height", height-margin.top-margin.bottom);
-
-	// var brush = d3.svg.brush()
-	// 	.x(time_scale2)
-	// 	.on("brush", brushed);
-
-	// var height2 = 25
-
-	// context.append("g")
-	// 	.attr("class", "x axis1")
-	// 	.attr("transform", "translate(0," + height2 + ")")
-	// 	.call(time_axis2);
-
-	// var contextArea = d3.svg.area()
-	// 	.interpolate("monotone")
-	// 	.x(function (d) {return time_scale2(d.cdate);})
-	// 	.y0(height2)
-	// 	.y1(0);
-
-	// context.append("path")
-	// 	.attr("class", "area")
-	// 	.attr("d", contextArea(dataAllObj))
-	// 	.attr("fill", "#000000");
-
-	// context.append("g")
-	// 	.attr("class", "x brush")
-	// 	.call(brush)
-	// 	.selectAll("rect")
-	// 	.attr("height", height2)
-	// 	.attr("fill", "#a8a8a8");
-
-	function brushed(){
-
-		time_scale.domain(brush.empty() ? time_scale2.domain() : brush.extent());
-
-		d3.selectAll(".x.axis")
-			.transition()
-			.call(time_axis);
-
-		g1.select(".x.axis")
-			.selectAll("g")
-			.select("text")
-			.attr("style", "opacity: 0");
-
-		g2.select(".x.axis")
-			.selectAll("g")
-			.select("text")
-			.attr("style", "opacity: 0");
-
-		g1.select(".linepath")
-			.transition()
-			.attr("d", line1(dataAllObj))
-			.attr("clip-path", "url(#clip)");
-
-		g2.select(".linepath")
-			.transition()
-			.attr("d", line2(dataAllObj))
-			.attr("clip-path", "url(#clip)");
-
-		g3.select(".linepath")
-			.transition()
-			.attr("d", line3(dataAllObj))
-			.attr("clip-path", "url(#clip)");
-	}
-	
+	}	
 }
 
 

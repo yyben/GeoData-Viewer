@@ -2,7 +2,7 @@ var radians = 0.0174532925,
 	clockRadius = 100,
 	margin = 50,
 	width = (clockRadius+margin)*2,
-    height = (clockRadius+margin)*2,
+    height = (clockRadius+margin)*2+400,//+400 for data panel
     hourHandLength = 2*clockRadius/3,
     minuteHandLength = clockRadius,
     secondHandLength = clockRadius-12,
@@ -47,15 +47,18 @@ var handData = [
 	}
 ];
 
+
+var svgclock = d3.select("#mypanel").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 var apm;//indicator of am/pm
+
+
 
 function drawClock(){ //create all the clock elements
 	updateData(new Date("April 16, 2016 00:00:00"));	//draw them in the correct starting position
-	var svg = d3.select("#myclock").append("svg")
-	    .attr("width", width)
-	    .attr("height", height);
 
-	var face = svg.append('g')
+	var face = svgclock.append('g')
 		.attr('id','clock-face')
 		.attr('transform','translate(' + (clockRadius + margin) + ',' + (clockRadius + margin) + ')');
 
@@ -140,7 +143,7 @@ function updateData(cdate){
 	hr=cdate.getHours();
 	min=cdate.getMinutes();
 	var t = new Date();
-	if(hr>=12){apm='PM';console.log(hr)}
+	if(hr>=12){apm='PM';}
 	else{apm='AM';}
 	handData[0].value = (hr % 12);
 	handData[1].value = min;
