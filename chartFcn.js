@@ -353,14 +353,17 @@ function draw(){
 	
 	var focus1 = g1
 		.append("circle")
+		.attr("id","g1dot")
 		.attr("r", 0);
 		
 	var focus2 = g2
 		.append("circle")
+		.attr("id","g2dot")
 		.attr("r", 0);
 		
 	var focus3 = g3
 		.append("circle")
+		.attr("id","g3dot")
 		.attr("r", 0);
 
 	var focus_OV_rain=gOV
@@ -383,8 +386,8 @@ function draw(){
 	
 	overlay.append("rect")
 		.attr("class", "overlay")
-		.attr("width", width1)
-		.attr("height", 4.5*height + 2*margin.bottom)//.attr("height", 3*height + 2*margin.bottom)
+		.attr("width", width1-margin.left)
+		.attr("height", 3.5*height + 2*margin.bottom)//.attr("height", 3*height + 2*margin.bottom)
 		.on("click", mouseclick)
 		.on("mousemove", mousemove);
 
@@ -398,7 +401,7 @@ function draw(){
 		drawDataPanel(d);
 	}
 	
-	var mousemoveData;
+	
 	var pColor="black";	
 	function mousemove() {
 		var x0 = time_scale.invert(d3.mouse(this)[0]),
@@ -414,7 +417,7 @@ function draw(){
 			var d = dataAllObj[i-1];
 		}
 		
-		mousemoveData=d;
+		
 		focus1.attr("transform", "translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
 			  .attr("r", 5).attr("fill", pColor);
 		
@@ -427,13 +430,13 @@ function draw(){
 			 .attr("r", 5).attr("fill", pColor);
 		
 
-	    focus_OV_water.attr("transform", "translate(" + time_scale(d.cdate) + "," + scale_OV(GNDwater2GNDwaterN(d.gndWater)) + ")")
+	    focus_OV_water.attr("transform", "translate(" + time_scale_OV(d.cdate) + "," + scale_OV(GNDwater2GNDwaterN(d.gndWater)) + ")")
 			 .attr("r", 3).attr("fill", pColor);
 
-		focus_OV_gps.attr("transform", "translate(" + time_scale(d.cdate) + "," + scale_OV(gps2GNDwaterN(d.gpsDist)) + ")")
+		focus_OV_gps.attr("transform", "translate(" + time_scale_OV(d.cdate) + "," + scale_OV(gps2GNDwaterN(d.gpsDist)) + ")")
 			 .attr("r", 3).attr("fill", pColor);
 
-		focus_OV_rain.attr("transform", "translate(" + time_scale(d.cdate) + "," + scale_OV(rain2GNDwaterN(d.rainfall)) + ")")
+		focus_OV_rain.attr("transform", "translate(" + time_scale_OV(d.cdate) + "," + scale_OV(rain2GNDwaterN(d.rainfall)) + ")")
 			 .attr("r", 3).attr("fill", pColor);
 
 	    updateData(d.cdate);
@@ -441,10 +444,6 @@ function draw(){
 
 	}	
 
-	console.log(rain2GNDwaterN(220));
-	console.log(gps2GNDwaterN(2));
-	console.log(rain2GNDwaterN(0));
-	console.log(gps2GNDwaterN(0));
 	function rain2GNDwaterN(v){
 		return -35-(500-v)/(500-200)*(-35-(-42));
 	}
