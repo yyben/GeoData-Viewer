@@ -351,11 +351,30 @@ function draw(){
 	var	formatValue = d3.format(",.2f");
 	var	formatCurrency = function(d) { return "$" + formatValue(d); };
 	
+
+	var text1 = g1.append("text")
+    	.attr("id","g1text")
+		.attr("transform","translate(80,0)")
+		.attr("opacity",0.3)
+		.text("");
+
+	var text2 = g2.append("text")
+    	.attr("id","g2text")
+		.attr("transform","translate(80,0)")
+		.attr("opacity",0.3)
+		.text("");
+		
+	var text3 = g3.append("text")
+    	.attr("id","g3text")
+		.attr("transform","translate(80,0)")
+		.attr("opacity",0.3)
+		.text("");
+
 	var focus1 = g1
 		.append("circle")
 		.attr("id","g1dot")
 		.attr("r", 0);
-		
+
 	var focus2 = g2
 		.append("circle")
 		.attr("id","g2dot")
@@ -421,14 +440,21 @@ function draw(){
 		focus1.attr("transform", "translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
 			  .attr("r", 5).attr("fill", pColor);
 		
+		d3.select("#g1text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")").text(Math.round(d.rainfall * 100) / 100);
 		
+
 		focus2.attr("transform", "translate(" + time_scale(d.cdate) + "," + displacement_scale(d.gpsDist) + ")")
 			 .attr("r", 5).attr("fill", pColor);
 		
+		d3.select("#g2text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + displacement_scale(d.gpsDist) + ")").text(Math.round(d.gpsDist * 100) / 100);
 		
+
 		focus3.attr("transform", "translate(" + time_scale(d.cdate) + "," + level_scale(d.gndWater) + ")")
 			 .attr("r", 5).attr("fill", pColor);
 		
+		d3.select("#g3text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + level_scale(d.gndWater) + ")").text(Math.round(d.gndWater * 100) / 100);
+
+
 
 	    focus_OV_water.attr("transform", "translate(" + time_scale_OV(d.cdate) + "," + scale_OV(GNDwater2GNDwaterN(d.gndWater)) + ")")
 			 .attr("r", 3).attr("fill", pColor);
