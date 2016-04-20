@@ -480,6 +480,7 @@ function draw(){
 	  time_scale.domain(brush.empty()?time_scale_OV:extent1);
 	  g3.select(".x.axis").call(time_axis);
 	  zoomRedraw();
+	  d3.selectAll("circle").attr("r",0);
 	}
 
 	function zoomRedraw(){
@@ -510,7 +511,7 @@ function draw(){
 		d3.select("#g3path")
 		  .attr('d', line3(dataAllObj));
 
-	  
+	    
 
 
 	}
