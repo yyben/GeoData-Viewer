@@ -6,7 +6,7 @@
     }
 	.axis text {
 		fill: dimgray;
-		font: 12px sans-serif;
+		font: 18px sans-serif;
 	}
 	.axis1 path, line{
         stroke:lightgrey;
@@ -58,4 +58,9 @@
 	}
 	.container {
 		float: left;
+	}
+	.brush .extent {
+	  stroke: #000;
+	  fill-opacity: .125;
+	  shape-rendering: crispEdges;
 	}
