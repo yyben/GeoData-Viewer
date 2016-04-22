@@ -628,8 +628,11 @@ function draw(){
 	    d3.select('#gMaskRight').attr('x',brushEndX).attr('width',width1-margin.left-brushEndX);
 	    //d3.select('#brushHandleL').attr('transform','translate('+brushStartX+',0)');
 	    //d3.select('#brushHandleR').attr('transform','translate('+brushEndX+',0)');
+
+   	
 	}
 	function brushended() {
+	  console.log('brushended')
 	  if (!d3.event.sourceEvent) return; // only transition after input
 	  var extent0 = brush.extent(),
 	      extent1 = extent0.map(d3.time.day.round);
@@ -653,9 +656,25 @@ function draw(){
 
 
 	  time_scale.domain(brush.empty()?time_scale_OV:extent1);
+
+
+
+
+	  time_axis = d3.svg.axis()
+		.scale(time_scale);
+
+	  d3.select('#chart3')
+		.call(time_axis)
+		.selectAll("text")
+ 	    .style("font-weight", function(d) { return d.getHours() == 0 ? "bold" : ""; })
+   		.style("font-size", function(d) { return d.getHours() == 0 ? 22 : 14; });
+
 	  g3.select(".x.axis").call(time_axis);
 	  zoomRedraw();
 	  d3.selectAll("circle").attr("r",0);
+
+
+
 	}
 
 	function zoomRedraw(){
