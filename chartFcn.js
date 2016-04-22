@@ -46,13 +46,16 @@ function draw(){
 		.range([height-margin.top-margin.bottom, 0])
 		.domain([-56,-29]);
 	
+	var xdateformatDay=d3.time.format("%m/%d"),xdateformat=d3.time.format("%H:%M"),xdateformatDate=d3.time.format("%a. %d");
 	var time_axis = d3.svg.axis()
 		.scale(time_scale)
 		.orient('bottom')
-		.tickSize(-height)
-		.tickSubdivide(true);
-
-
+		.ticks(12)
+		.tickSubdivide(true)//true
+		.tickSize(-height)//-height
+		.tickFormat(function(d){return d.getHours() == 0 ? xdateformatDate(d):xdateformat(d);});
+		
+	
 	var time_axis_OV = d3.svg.axis()
 		.scale(time_scale_OV)
 		.orient('bottom')
@@ -272,12 +275,17 @@ function draw(){
 		.attr("id", "chart3")
 		.attr("transform", "translate(0," + (margin.top+height-30).toString() + ")")
 		.call(time_axis)
-		.selectAll("text")  
+		.selectAll("text")
+		.attr("id",'tick-text')  
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
         .attr("dy", ".15em")
         .attr("transform", "rotate(-65)" );
- 
+
+ 	d3.selectAll("#tick-text")
+ 	    .style("font-weight", function(d) { return d.getHours() == 0 ? "bold" : ""; })
+   		.style("font-size", function(d) { return d.getHours() == 0 ? 22 : 14; });
+
 	g3.append("g")
 		.attr("class", "y axis")
 		.call(level_axis);
@@ -468,7 +476,12 @@ function draw(){
 		.attr("transform","translate(80,0)")
 		.attr("opacity",0.3)
 		.text("");
-
+	var text_time = g3.append("text")
+		.attr("id","g3text_time")
+		.attr("transform","translate(80,240)")
+		.attr("opacity",0.5)
+		.attr("font-size","16pt")
+		.text("");
 	var focus1 = g1
 		.append("circle")
 		.attr("id","g1dot")
@@ -555,7 +568,7 @@ function draw(){
 			 .attr("r", 5).attr("fill", pColor);
 		
 		d3.select("#g3text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + (level_scale(d.gndWater)-10).toString() + ")").text(Math.round(d.gndWater * 100) / 100);
-
+		d3.select('#g3text_time').attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + ",240)").text(xdateformat(d.cdate));
 
 
 	    focus_OV_water.attr("transform", "translate(" + time_scale_OV(d.cdate) + "," + scale_OV(GNDwater2GNDwaterN(d.gndWater)) + ")")

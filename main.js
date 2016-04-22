@@ -4,7 +4,7 @@ var objRainfall=[], objGndWater=[], objDist=[],accu24RainObj=[],dataAllObj=[];//
 var dateformat=d3.time.format("%Y/%m/%d %H:%M");
 var labelDateFormat=d3.time.format("%Y/%m/%d ");
 var weekday = new Array(7);
-var timeLabels = new Array(14);
+var months = new Array(12);
 var dateStr="2012/6/11";//the selected date within the week
 var selectedDate=dateformat.parse(dateStr+" 00:00");
 var startDate=selectedWeek(selectedDate);
@@ -16,28 +16,15 @@ parseData();
 
 function initAttr(){
 	//weekday init
-	weekday[0]=  "Sunday";
-	weekday[1] = "Monday";
-	weekday[2] = "Tuesday";
-	weekday[3] = "Wednesday";
-	weekday[4] = "Thursday";
-	weekday[5] = "Friday";
-	weekday[6] = "Saturday";
-	//timeLabels init
-	timeLabels[0]=  "00:00";
-	timeLabels[1] = "12:00";
-	timeLabels[2]=  "00:00";
-	timeLabels[3] = "12:00";
-	timeLabels[4]=  "00:00";
-	timeLabels[5] = "12:00";
-	timeLabels[6]=  "00:00";
-	timeLabels[7] = "12:00";
-	timeLabels[8]=  "00:00";
-	timeLabels[9] = "12:00";
-	timeLabels[10]=  "00:00";
-	timeLabels[11] = "12:00";
-	timeLabels[12]=  "00:00";
-	timeLabels[13] = "12:00";
+	weekday[0]=  "Sun.";
+	weekday[1] = "Mon.";
+	weekday[2] = "Tue.";
+	weekday[3] = "Wed.";
+	weekday[4] = "Thu.";
+	weekday[5] = "Fri.";
+	weekday[6] = "Sat.";
+
+	
 }
 function selectedWeek(date){
     var wkDay=selectedDate.getDay();
