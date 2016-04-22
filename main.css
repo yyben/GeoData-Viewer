@@ -23,8 +23,8 @@ h3 {
 /* define height and width of scrollable area. Add 16px to width for scrollbar          */
 div.tableContainer {
 	clear: both;
-	border: 1px solid #963;
-	height: 285px;
+	border: 1px solid #000;
+	height: 585px;
 	overflow: auto;
 	width: 756px
 }
@@ -72,7 +72,7 @@ thead.fixedHeader th {
 	border-top: 1px solid #000;
 	font-weight: normal;
 	padding: 25px 3px;
-	text-align: left
+	text-align: center;
 }
 
 /* make the A elements pretty. makes for nice clickable headers                */
@@ -99,7 +99,7 @@ thead.fixedHeader a:hover {
 /* induced side effect is that child TDs no longer accept width: auto                     */
 html>body tbody.scrollContent {
 	display: block;
-	height: 262px;
+	height: 400px;
 	overflow: auto;
 	width: 100%;
 
@@ -121,8 +121,8 @@ tbody.scrollContent tr.alternateRow td {
 	background: #EEE;
 	border-bottom: none;
 	border-left: none;
-	border-right: 1px solid #CCC;
-	border-top: 1px solid #DDD;
+	border-right: 1px solid #000;
+	border-top: 1px solid #000;
 	padding: 2px 3px 3px 4px;
 
 }
@@ -131,34 +131,43 @@ tbody.scrollContent tr.alternateRow td {
 /* Add 16px to last TH for scrollbar padding. All other non-IE browsers. */
 /* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
 html>body thead.fixedHeader th {
-	width: 230px
+	width: 270px
+
 }
 
 html>body thead.fixedHeader th + th {
 	width: 270px
+	
 }
 
 html>body thead.fixedHeader th + th + th {
-	width: 300px
+	width: 270px
+	
 }
 html>body thead.fixedHeader th + th + th + th {
-	width: 330px
+	width: 270px
+	
 }
 
 /* define width of TD elements: 1st, 2nd, and 3rd respectively.          */
 /* All other non-IE browsers.                                            */
 /* http://www.w3.org/TR/REC-CSS2/selector.html#adjacent-selectors        */
 html>body tbody.scrollContent td {
-	width: 230px
+	width: 270px;
+	text-align: center;
 }
 
 html>body tbody.scrollContent td + td {
-	width: 270px
+	width: 270px;
+	text-align: center;
 }
 
 html>body tbody.scrollContent td + td + td {
-	width: 300px
+	width: 270px;
+	text-align: center;
+	
 }
 html>body tbody.scrollContent td + td + td + td {
-	width: 330px
+	width: 270px
+	text-align: center;
 }

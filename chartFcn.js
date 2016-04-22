@@ -144,7 +144,7 @@ function draw(){
 	svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
 	.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 30)
@@ -162,7 +162,7 @@ function draw(){
     svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
 	.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gndwater.svg")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 190)
@@ -302,7 +302,7 @@ function draw(){
 
 
     g3.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gndwater.svg")
     .attr("width", 200)
     .attr("height", 200)
     .attr("x", -250)
