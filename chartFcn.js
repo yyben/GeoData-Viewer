@@ -182,11 +182,11 @@ function draw(){
  //   .attr('height', 24)
  //   .attr("xlink:href","./images/check.png")
    	g1.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
     .attr("width", 200)
     .attr("height", 200)
     .attr("x", -250)
-    .attr("y",-30);	        
+    .attr("y",-30);	       
 		
 	//Chart 2 
 	// draw axes
@@ -224,7 +224,13 @@ function draw(){
     	.attr('d', line2(dataAllObj));	
 
 	g2.append('text').attr('transform','translate(-35,-25)').text('[cm]'); 
-		
+	
+	g2.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("width", 200)
+    .attr("height", 200)
+    .attr("x", -250)
+    .attr("y",-30);		
 								
 	//Chart 3 
 	// draw axes
@@ -267,6 +273,12 @@ function draw(){
     g3.append('text').attr('transform','translate(-32,-25)').text('[m]'); 
 
 
+    g3.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
+    .attr("width", 200)
+    .attr("height", 200)
+    .attr("x", -250)
+    .attr("y",-30);	 
     //draw overview chart
 	var gOV = svg
 		.append("g")
