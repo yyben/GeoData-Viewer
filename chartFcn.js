@@ -20,6 +20,7 @@ var endDate=addDays(startDate, 7);
 
 function draw(){
 	var  xLabelRot=45;
+	var  smallIconspace=55;
 	var  margin = {top: 10, right: 0, bottom: 30, left: 60+200};
 	var  width1 = 680+200;//width1-margin.left=620
 	var  height = 150;
@@ -140,19 +141,46 @@ function draw(){
 		.append("svg")
 		.attr("width", width1 + 20)
 		.attr("height", 6.5 * (height + 30 ));
-						
+	svg.append('g')
+	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
+	.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("x", 30)
+    .attr("y",40);
+
+	svg.append('g')
+	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
+	.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("x", 110)
+    .attr("y",40);	 
+
+    svg.append('g')
+	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
+	.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("width", 50)
+    .attr("height", 50)
+    .attr("x", 190)
+    .attr("y",40);	
+
 	var g1 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top+  height+subToSubOffsetY + subToOVOffsetY+ time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (smallIconspace+margin.top+ height+subToSubOffsetY + subToOVOffsetY+ time_height).toString() + ")");
 
 	g1.append("g")
 		.attr("class", "y axis")
+		.attr("transform", "translate(0,0)")		
 		.call(rainfall_axis);
 
 	g1.append("g")
 		.attr("class", "x axis")
 		.attr("id", "chart1")
-		.attr("transform", "translate(0," + (height-20) + ")")
+		.attr("transform", "translate(0," + (margin.top+height-30).toString() + ")")
 		.call(time_axis)
 		.selectAll("g")
 		.select("text")
@@ -193,7 +221,7 @@ function draw(){
 	
 	var g2 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top  + 2*(height+subToSubOffsetY)+ subToOVOffsetY   + time_height) +")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (smallIconspace+margin.top  + 2*(height+subToSubOffsetY)+ subToOVOffsetY   + time_height).toString() +")");
  
 	g2.append("g")
 		.attr("class", "y axis")
@@ -202,7 +230,7 @@ function draw(){
 	g2.append("g")
 		.attr("class", "x axis")
 		.attr("id", "chart2")
-		.attr("transform", "translate(0," + (height-20) + ")")
+		.attr("transform", "translate(0," + (margin.top+height-30).toString() + ")")
 		.call(time_axis)
 		.selectAll("g")
 		.select("text")
@@ -237,12 +265,12 @@ function draw(){
 	
 	var g3 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top+ 3*(height+subToSubOffsetY) + subToOVOffsetY + time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (smallIconspace+margin.top+ 3*(height+subToSubOffsetY) + subToOVOffsetY + time_height).toString() + ")");
 
 	g3.append("g")
 		.attr("class", "x axis")
 		.attr("id", "chart3")
-		.attr("transform", "translate(0," + (height-20) + ")")
+		.attr("transform", "translate(0," + (margin.top+height-30).toString() + ")")
 		.call(time_axis)
 		.selectAll("text")  
         .style("text-anchor", "end")
@@ -274,7 +302,7 @@ function draw(){
 
 
     g3.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
     .attr("width", 200)
     .attr("height", 200)
     .attr("x", -250)
@@ -282,12 +310,12 @@ function draw(){
     //draw overview chart
 	var gOV = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (smallIconspace+margin.top + time_height).toString() + ")");
 
 	gOV.append("g")
 		.attr("class", "x axis")
 		.attr("id", "chart4")
-		.attr("transform", "translate(0," + (height-20) + ")")
+		.attr("transform", "translate(0," + (margin.top+height-30).toString() + ")")
 		.call(time_axis_OV)
 		.selectAll("text")  
         .style("text-anchor", "end")
@@ -301,12 +329,12 @@ function draw(){
 
     gOV.append("g")
 		.attr("class", "y axis")
-		.attr("transform","translate(-80,0)")
+		.attr("transform","translate(-90,0)")
 		.call(displacement_axis_OV);    
 
 	gOV.append("g")
 		.attr("class", "y axis")
-		.attr("transform","translate(-130,0)")
+		.attr("transform","translate(-180,0)")
 		.call(level_axis_OV);
 
 	//draw lineChart
@@ -320,7 +348,22 @@ function draw(){
     gOV.append('path')
 	 	.attr("class", "linepath")
     	.attr('d', line3_OV(dataAllObj));
-
+    //draw the warning line	
+	var warnOV_Gndwater_1 = gOV.append("line")
+                   .attr("x1", 0)
+                   .attr("y1", scale_OV(-35))
+                   .attr("x2", 620)
+                   .attr("y2",scale_OV(-35))
+				   .attr("class", "line")
+				   .style("stroke-dasharray", ("5, 3"));
+				   
+	var warnOV_Gndwater_2 = gOV.append("line")
+                   .attr("x1", 0)
+                   .attr("y1", scale_OV(-42))
+                   .attr("x2", 620)
+                   .attr("y2",scale_OV(-42))
+				   .attr("class", "line2")
+				   .style("stroke-dasharray", ("5, 3"));	
     
 
 	var gMaskLeft=gOV.append("g")
@@ -360,44 +403,44 @@ function draw(){
 
 
 	 //draw the warning line
-	var warn_Rain_1 = g1.append("line")
+	var warn_Rain_2 = g1.append("line")
                    .attr("x1", 0)
-                   .attr("y1", 22)
+                   .attr("y1", rainfall_scale(200))
                    .attr("x2", 620)
-                   .attr("y2",22)
-				   .attr("class", "line")
+                   .attr("y2",rainfall_scale(200))
+				   .attr("class", "line2")
 				   .style("stroke-dasharray", ("5, 3"));
 	
 	//draw the warning line
-	var warn_Displacement_1 = g1.append("line")
+	var warn_Displacement_1 = g2.append("line")
                    .attr("x1", 0)
-                   .attr("y1", 268)
+                   .attr("y1", displacement_scale(2))
                    .attr("x2", 620)
-                   .attr("y2",268)
+                   .attr("y2",displacement_scale(2))
 				   .attr("class", "line")
 				   .style("stroke-dasharray", ("5, 3"));
 				   
-	var warn_Displacement_2 = g1.append("line")
+	var warn_Displacement_2 = g2.append("line")
                    .attr("x1", 0)
-                   .attr("y1", 202)
+                   .attr("y1", displacement_scale(0.5))
                    .attr("x2", 620)
-                   .attr("y2",202)
+                   .attr("y2",displacement_scale(0.5))
 				   .attr("class", "line2")
 				   .style("stroke-dasharray", ("5, 3"));
 	//draw the warning line	
-	var warn_Groundwater_1 = g1.append("line")
+	var warn_Groundwater_1 = g3.append("line")
                    .attr("x1", 0)
-                   .attr("y1", 439)
+                   .attr("y1", level_scale(-35))
                    .attr("x2", 620)
-                   .attr("y2",439)
+                   .attr("y2",level_scale(-35))
 				   .attr("class", "line")
 				   .style("stroke-dasharray", ("5, 3"));
 				   
-	var warn_Groundwater_2 = g1.append("line")
+	var warn_Groundwater_2 = g3.append("line")
                    .attr("x1", 0)
-                   .attr("y1", 426)
+                   .attr("y1", level_scale(-42))
                    .attr("x2", 620)
-                   .attr("y2",426)
+                   .attr("y2",level_scale(-42))
 				   .attr("class", "line2")
 				   .style("stroke-dasharray", ("5, 3"));
 					
@@ -498,20 +541,20 @@ function draw(){
 		
 		d3.select("#g1text")
 			.attr("opacity",1.0)
-			.attr("transform","translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
+			.attr("transform","translate(" + time_scale(d.cdate) + "," + (rainfall_scale(d.rainfall)-10).toString() + ")")
 			.text(Math.round(d.rainfall * 100) / 100);
 		
 
 		focus2.attr("transform", "translate(" + time_scale(d.cdate) + "," + displacement_scale(d.gpsDist) + ")")
 			 .attr("r", 5).attr("fill", pColor);
 		
-		d3.select("#g2text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + displacement_scale(d.gpsDist) + ")").text(Math.round(d.gpsDist * 100) / 100);
+		d3.select("#g2text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + (displacement_scale(d.gpsDist)-10).toString() + ")").text(Math.round(d.gpsDist * 100) / 100);
 		
 
 		focus3.attr("transform", "translate(" + time_scale(d.cdate) + "," + level_scale(d.gndWater) + ")")
 			 .attr("r", 5).attr("fill", pColor);
 		
-		d3.select("#g3text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + level_scale(d.gndWater) + ")").text(Math.round(d.gndWater * 100) / 100);
+		d3.select("#g3text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + (level_scale(d.gndWater)-10).toString() + ")").text(Math.round(d.gndWater * 100) / 100);
 
 
 

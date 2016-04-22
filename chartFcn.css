@@ -3,7 +3,7 @@
     stroke: black;
 
 }
- body{
+  body{
         font-family:sans-serif;
     }
     .axis path, line{
@@ -32,11 +32,11 @@
    
 	
 	.line {
-        stroke:#FFD700;
+        stroke:#E55451;
     }
 	
 	.line2 {
-        stroke:#E55451;
+        stroke:#FFD700;
     }
 	
 	.line3 {
