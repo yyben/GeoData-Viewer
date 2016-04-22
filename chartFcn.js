@@ -53,14 +53,15 @@ function draw(){
 		.ticks(12)
 		.tickSubdivide(true)//true
 		.tickSize(-height)//-height
-		.tickFormat(function(d){return d.getHours() == 0 ? xdateformatDate(d):xdateformat(d);});
+		.tickFormat(function(d){return  xdateformatDate(d);});
 		
 	
 	var time_axis_OV = d3.svg.axis()
 		.scale(time_scale_OV)
 		.orient('bottom')
 		.tickSize(-height)
-		.tickSubdivide(true);
+		.tickSubdivide(true)
+		.tickFormat(function(d){return d.getHours() == 0 ? xdateformatDate(d):xdateformat(d);});
 
 	var rainfall_axis = d3.svg.axis()
 		.scale(rainfall_scale)
@@ -151,7 +152,30 @@ function draw(){
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 30)
-    .attr("y",40);
+    .attr("y",40)
+	.on('mouseover',function(d){
+		
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',2);
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+	})
+	.on('mouseout',function(d){
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',1);
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+	});
 
 	svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
@@ -160,7 +184,30 @@ function draw(){
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 110)
-    .attr("y",40);	 
+    .attr("y",40)
+    .on('mouseover',function(d){
+		
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',2);
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+	})
+	.on('mouseout',function(d){
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',1);
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+	});	 
 
     svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
@@ -169,7 +216,30 @@ function draw(){
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 190)
-    .attr("y",40);	
+    .attr("y",40)
+    .on('mouseover',function(d){
+		
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',2);
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('opacity',0.2);
+	})
+	.on('mouseout',function(d){
+		var selectthepath=$('.linepathOV3');
+		d3.selectAll(selectthepath)
+		  .style('stroke-width',1);
+		var selectthepath=$('.linepathOV1');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+		var selectthepath=$('.linepathOV2');
+		d3.selectAll(selectthepath)
+		  .style('opacity',1.0);
+	});	
 
 	var g1 = svg
 		.append("g")
@@ -203,6 +273,7 @@ function draw(){
 	 	.attr("id","g1path")
 	 	.attr("clip-path","url(#g1clip)")
     	.attr('d', line1(dataAllObj));
+    	
 
 	g1.append('text').attr('transform','translate(-35,-25)').text('[mm]'); 
 
@@ -347,15 +418,16 @@ function draw(){
 
 	//draw lineChart
 		
+    
 	gOV.append('path')
-	 	.attr("class", "linepath")
+	 	.attr("class", "linepathOV1")
     	.attr('d', line1_OV(dataAllObj));	
     gOV.append('path')
-	 	.attr("class", "linepath")
-    	.attr('d', line2_OV(dataAllObj));
+	 	.attr("class", "linepathOV2")
+    	.attr('d', line2_OV(dataAllObj));	
     gOV.append('path')
-	 	.attr("class", "linepath")
-    	.attr('d', line3_OV(dataAllObj));
+	 	.attr("class", "linepathOV3")
+    	.attr('d', line3_OV(dataAllObj));	
     //draw the warning line	
 	var warnOV_Gndwater_1 = gOV.append("line")
                    .attr("x1", 0)
@@ -524,12 +596,9 @@ function draw(){
 
 
 	
-
+	var dataTmpObj;	
 	function mouseclick(){
-		var x0 = time_scale.invert(d3.mouse(this)[0]),
-			i = bisectTime(dataAllObj, x0, 1);
-		var d=dataAllObj[i-1];
-		drawDataPanel(d);
+		drawDataPanel(dataTmpObj);
 	}
 	
 	
@@ -548,7 +617,7 @@ function draw(){
 			var d = dataAllObj[i-1];
 		}
 		
-		
+		dataTmpObj=d;
 		focus1.attr("transform", "translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
 			  .attr("r", 5).attr("fill", pColor);
 		
@@ -632,7 +701,7 @@ function draw(){
    	
 	}
 	function brushended() {
-	  console.log('brushended')
+	  
 	  if (!d3.event.sourceEvent) return; // only transition after input
 	  var extent0 = brush.extent(),
 	      extent1 = extent0.map(d3.time.day.round);
@@ -661,7 +730,12 @@ function draw(){
 
 
 	  time_axis = d3.svg.axis()
-		.scale(time_scale);
+		.scale(time_scale)
+		.orient('bottom')
+		.ticks(12)
+		.tickSubdivide(true)//true
+		.tickSize(-height)//-height
+		.tickFormat(function(d){return d.getHours() == 0 ? xdateformatDate(d):xdateformat(d);});
 
 	  d3.select('#chart3')
 		.call(time_axis)
@@ -669,6 +743,8 @@ function draw(){
  	    .style("font-weight", function(d) { return d.getHours() == 0 ? "bold" : ""; })
    		.style("font-size", function(d) { return d.getHours() == 0 ? 22 : 14; });
 
+	  g1.select(".x.axis").call(time_axis);
+	  g2.select(".x.axis").call(time_axis);
 	  g3.select(".x.axis").call(time_axis);
 	  zoomRedraw();
 	  d3.selectAll("circle").attr("r",0);
