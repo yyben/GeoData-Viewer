@@ -175,13 +175,18 @@ function draw(){
 
 	g1.append('text').attr('transform','translate(-35,-25)').text('[mm]'); 
 
-	g1.append("svg:image")
-   .attr('x',-9)
-   .attr('y',-12)
-   .attr('width', 20)
-   .attr('height', 24)
-   .attr("xlink:href","./images/check.png")
-   		        
+	// g1.append("svg:image")
+ //   .attr('x',-9)
+ //   .attr('y',-12)
+ //   .attr('width', 20)
+ //   .attr('height', 24)
+ //   .attr("xlink:href","./images/check.png")
+   	g1.append("svg:image")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("width", 200)
+    .attr("height", 200)
+    .attr("x", -250)
+    .attr("y",-30);	        
 		
 	//Chart 2 
 	// draw axes
