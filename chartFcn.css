@@ -1,3 +1,8 @@
+.brushHandle{
+	stroke-width: 5;
+    stroke: black;
+
+}
  body{
         font-family:sans-serif;
     }

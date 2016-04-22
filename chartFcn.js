@@ -21,7 +21,7 @@ var endDate=addDays(startDate, 7);
 function draw(){
 	var  xLabelRot=45;
 	var  margin = {top: 10, right: 0, bottom: 30, left: 60+200};
-	var  width1 = 680+200;
+	var  width1 = 680+200;//width1-margin.left=620
 	var  height = 150;
 	var time_scale = d3.time.scale()
 		.range([0, width1-margin.left-margin.right]);
@@ -126,21 +126,24 @@ function draw(){
     var brush = d3.svg.brush()
     .x(time_scale_OV)
     .extent(d3.extent(dataAllObj, function(d){ return d.cdate;}))
+    .on("brushstart", brushstart)
+    .on("brush", brushmove)
     .on("brushend", brushended);	
 
 	var time_height = 30;
 	var format_time = d3.time.format("%Y-%m-%d %H:%M");
 	
+	var subToOVOffsetY=130,subToSubOffsetY=40;
 	//Chart 1 
 	// draw axes
 	var svg = d3.select("#MainChart")
 		.append("svg")
 		.attr("width", width1 + 20)
-		.attr("height", 5 * (height + 30 ));
+		.attr("height", 6.5 * (height + 30 ));
 						
 	var g1 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top+time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top+  height+subToSubOffsetY + subToOVOffsetY+ time_height) + ")");
 
 	g1.append("g")
 		.attr("class", "y axis")
@@ -168,10 +171,16 @@ function draw(){
 	 	.attr("class", "linepath")
 	 	.attr("id","g1path")
 	 	.attr("clip-path","url(#g1clip)")
-    	.attr('d', line1(dataAllObj));		
-	 
+    	.attr('d', line1(dataAllObj));
 
+	g1.append('text').attr('transform','translate(-35,-25)').text('[mm]'); 
 
+	g1.append("svg:image")
+   .attr('x',-9)
+   .attr('y',-12)
+   .attr('width', 20)
+   .attr('height', 24)
+   .attr("xlink:href","./images/check.png")
    		        
 		
 	//Chart 2 
@@ -179,7 +188,7 @@ function draw(){
 	
 	var g2 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + (height + 30) + time_height) +")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top  + 2*(height+subToSubOffsetY)+ subToOVOffsetY   + time_height) +")");
  
 	g2.append("g")
 		.attr("class", "y axis")
@@ -209,7 +218,7 @@ function draw(){
 	 	.attr("clip-path","url(#g2clip)")
     	.attr('d', line2(dataAllObj));	
 
-	
+	g2.append('text').attr('transform','translate(-35,-25)').text('[cm]'); 
 		
 								
 	//Chart 3 
@@ -217,7 +226,7 @@ function draw(){
 	
 	var g3 = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + 2*(height + 30) + time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top+ 3*(height+subToSubOffsetY) + subToOVOffsetY + time_height) + ")");
 
 	g3.append("g")
 		.attr("class", "x axis")
@@ -250,13 +259,13 @@ function draw(){
 	 	.attr("clip-path","url(#g3clip)")
     	.attr('d', line3(dataAllObj));
 
-    
+    g3.append('text').attr('transform','translate(-32,-25)').text('[m]'); 
 
 
     //draw overview chart
 	var gOV = svg
 		.append("g")
-		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + 3.5*(height + 30) + time_height) + ")");
+		.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")");
 
 	gOV.append("g")
 		.attr("class", "x axis")
@@ -295,14 +304,44 @@ function draw(){
 	 	.attr("class", "linepath")
     	.attr('d', line3_OV(dataAllObj));
 
-    var gBrush = gOV.append("g")
+    
+
+	var gMaskLeft=gOV.append("g")
+		.attr("class","mask")
+		.append("rect")
+		.attr('id','gMaskLeft')
+		.attr('x',0)
+		.attr('y',-20)
+		.attr('width',0)
+		.attr('height',height)
+		.attr("opacity",0.3);
+	
+	var gMaskRight=gOV.append("g")
+		.attr("class","mask")
+		.append("rect")
+		.attr('id','gMaskRight')
+		.attr('x',width1-margin.left)
+		.attr('y',-20)
+		.attr('width',0)
+		.attr('height',height)
+		.attr("opacity",0.3);
+
+	var gBrush = gOV.append("g")
 	    .attr("class", "brush")
 	    .call(brush)
 	    .call(brush.event);
-
+	//var brushHandleLoffset=-5;
+    //gBrush.append('polygon').attr('id','brushHandleR').attr('transform','translate(615,0)').attr('points','0,-20 3,-20 3,40 10,55 3,70 3,130 0,130');
+    //gBrush.append('polygon').attr('id','brushHandleL').attr('transform','translate('+brushHandleLoffset+',0)').attr('points','10,-20 7,-20 7,40 0,55 7,70 7,130 10,130');
+	
+        
 	gBrush.selectAll("rect")
 		.attr("transform","translate(0,-20)")
 	    .attr("height", height);	
+	d3.selectAll(".resize").select("rect").style("visibility","visible").attr("width",4);    
+	
+
+
 	 //draw the warning line
 	var warn_Rain_1 = g1.append("line")
                    .attr("x1", 0)
@@ -401,12 +440,12 @@ function draw(){
 		.attr("r",0);
 
 	var overlay = svg.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");					
+		.attr("transform", "translate(" + (margin.left-10).toString() + "," + (margin.top+1.5*height).toString() + ")");					
 	
 	overlay.append("rect")
 		.attr("class", "overlay")
 		.attr("width", width1-margin.left)
-		.attr("height", 3.5*height + 2*margin.bottom)//.attr("height", 3*height + 2*margin.bottom)
+		.attr("height", 4*height+10 + 2*margin.bottom)//.attr("height", 3*height + 2*margin.bottom)
 		.on("click", mouseclick)
 		.on("mousemove", mousemove);
 
@@ -440,7 +479,10 @@ function draw(){
 		focus1.attr("transform", "translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
 			  .attr("r", 5).attr("fill", pColor);
 		
-		d3.select("#g1text").attr("opacity",1.0).attr("transform","translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")").text(Math.round(d.rainfall * 100) / 100);
+		d3.select("#g1text")
+			.attr("opacity",1.0)
+			.attr("transform","translate(" + time_scale(d.cdate) + "," + rainfall_scale(d.rainfall) + ")")
+			.text(Math.round(d.rainfall * 100) / 100);
 		
 
 		focus2.attr("transform", "translate(" + time_scale(d.cdate) + "," + displacement_scale(d.gpsDist) + ")")
@@ -489,6 +531,31 @@ function draw(){
 	function invGNDwater2GNDwaterN(v){
 		return v;
 	}
+	function brushstart(){
+		
+	    
+
+	}
+	function brushmove(){
+		if (!d3.event.sourceEvent) return; // only transition after input
+		var extent0 = brush.extent(),
+		  extent1 = extent0.map(d3.time.day.round);
+
+		// if empty when rounded, use floor & ceil instead
+		if (extent1[0] >= extent1[1]) {
+		extent1[0] = d3.time.day.floor(extent0[0]);
+		extent1[1] = d3.time.day.ceil(extent0[1]);
+		}
+
+	
+		//var brushWidth=time_scale_OV(extent1[1])-time_scale_OV(extent1[0]);
+		var brushStartX=time_scale_OV(extent0[0]);
+		var brushEndX=time_scale_OV(extent0[1]);
+		d3.select('#gMaskLeft').attr('width',brushStartX);
+	    d3.select('#gMaskRight').attr('x',brushEndX).attr('width',width1-margin.left-brushEndX);
+	    //d3.select('#brushHandleL').attr('transform','translate('+brushStartX+',0)');
+	    //d3.select('#brushHandleR').attr('transform','translate('+brushEndX+',0)');
+	}
 	function brushended() {
 	  if (!d3.event.sourceEvent) return; // only transition after input
 	  var extent0 = brush.extent(),
@@ -503,6 +570,15 @@ function draw(){
 	  d3.select(this).transition()
 	      .call(brush.extent(extent1))
 	      .call(brush.event);
+	  //var brushWidth=time_scale_OV(extent1[1])-time_scale_OV(extent1[0]);
+	  var brushStartX=time_scale_OV(extent1[0]);
+	  var brushEndX=time_scale_OV(extent1[1]);
+	  d3.select('#gMaskLeft').transition().attr('width',brushStartX);
+	  d3.select('#gMaskRight').transition().attr('x',brushEndX).attr('width',width1-margin.left-brushEndX);
+	  //d3.select('#brushHandleL').attr('transform','translate('+brushStartX+',0)');
+	  //d3.select('#brushHandleR').attr('transform','translate('+brushEndX+',0)');
+
+
 	  time_scale.domain(brush.empty()?time_scale_OV:extent1);
 	  g3.select(".x.axis").call(time_axis);
 	  zoomRedraw();
