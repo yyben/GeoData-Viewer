@@ -148,7 +148,7 @@ function draw(){
 	svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
 	.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfallOnly.svg")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 30)
@@ -180,7 +180,7 @@ function draw(){
 	svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
 	.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDist.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gpsDistOnly.svg")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 110)
@@ -212,7 +212,7 @@ function draw(){
     svg.append('g')
 	//.attr("transform", "translate(" + (margin.left-10) + "," + (margin.top + time_height) + ")")
 	.append("svg:image")
-    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gndwater.svg")
+    .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/gndwaterOnly.svg")
     .attr("width", 50)
     .attr("height", 50)
     .attr("x", 190)
@@ -757,7 +757,7 @@ function draw(){
 		.orient('bottom')
 		.ticks(12)
 		.tickSubdivide(true)//true
-		.tickSize(-height)//-height
+		.tickSize(-height)//-height//function(d){return d.getHours() == 0 ? -150 : -130 ;}
 		.tickFormat(function(d){return d.getHours() == 0 ? xdateformatDate(d):xdateformat(d);});
 
 	  d3.select('#chart3')
@@ -766,8 +766,8 @@ function draw(){
  	    .style("font-weight", function(d) { return d.getHours() == 0 ? "bold" : ""; })
    		.style("font-size", function(d) { return d.getHours() == 0 ? 22 : 14; });
 
-	  g1.select(".x.axis").call(time_axis);
-	  g2.select(".x.axis").call(time_axis);
+	  g1.select(".x.axis").call(time_axis).selectAll('text').attr('opacity',0);
+	  g2.select(".x.axis").call(time_axis).selectAll('text').attr('opacity',0);
 	  g3.select(".x.axis").call(time_axis);
 	  zoomRedraw();
 	  d3.selectAll("circle").attr("r",0);
