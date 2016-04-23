@@ -277,12 +277,7 @@ function draw(){
 
 	g1.append('text').attr('transform','translate(-35,-25)').text('[mm]'); 
 
-	// g1.append("svg:image")
- //   .attr('x',-9)
- //   .attr('y',-12)
- //   .attr('width', 20)
- //   .attr('height', 24)
- //   .attr("xlink:href","./images/check.png")
+
    	g1.append("svg:image")
     .attr("xlink:href", "https://gitcdn.xyz/repo/yyben/GeoData-Viewer/master/images/rainfall.svg")
     .attr("width", 200)
@@ -474,7 +469,20 @@ function draw(){
     //gBrush.append('polygon').attr('id','brushHandleR').attr('transform','translate(615,0)').attr('points','0,-20 3,-20 3,40 10,55 3,70 3,130 0,130');
     //gBrush.append('polygon').attr('id','brushHandleL').attr('transform','translate('+brushHandleLoffset+',0)').attr('points','10,-20 7,-20 7,40 0,55 7,70 7,130 10,130');
 	
-        
+	
+    
+	var grad = svg.append("linearGradient").attr({
+		"id": "gradArea",
+		"x1": "0%",
+		"x2": "0%",
+		"y1": "100%",
+		"y2": "0%",
+	});
+	grad.append("stop").attr("offset", "30%").attr("stop-color", "#F9F9F9");
+	grad.append("stop").attr("offset", "98%").attr("stop-color", "#e1e1e3");
+
+	gBrush.append('polygon').attr('fill','url(#gradArea)').attr('id','zoomShadow').attr('transform','translate(0,210)').attr('points','0,0 '+(width1-margin.left).toString()+',0 '+(width1-margin.left).toString()+',70 0,70');
+
 	gBrush.selectAll("rect")
 		.attr("transform","translate(0,-20)")
 	    .attr("height", height);	
@@ -594,8 +602,23 @@ function draw(){
 		.on("click", mouseclick)
 		.on("mousemove", mousemove);
 
+	// var XYArea = d3.svg.line().x(function(d, i) {return d.x; }).y(function(d) { return d.y; });
+	// var grad = svg.append("linearGradient").attr({
+	// 	"id": "grad",
+	// 	"x1": "0%",
+	// 	"x2": "0%",
+	// 	"y1": "0%",
+	// 	"y2": "100%",
+	// });
+	// grad.append("stop").attr("offset", "30%").attr("stop-color", "white");
+	// grad.append("stop").attr("offset", "98%").attr("stop-color", "#e1e1e3");
+	// var enlarge_Height = margin.top + margin.bottom;
+	// var enlarge_Site = [ {"x": 0, "y": enlarge_Height}, {"x": 0, "y": 0},
+	// 		{"x": width, "y": 0}, {"x": width, "y": enlarge_Height}];
+	// var enlarge_Area = gOV.append("g").append("path").attr("d", XYArea(enlarge_Site))
+	// .attr("transform", "translate(0," + height + ")").attr("fill","url(#grad)");
 
-	
+
 	var dataTmpObj;	
 	function mouseclick(){
 		drawDataPanel(dataTmpObj);
@@ -697,7 +720,7 @@ function draw(){
 	    d3.select('#gMaskRight').attr('x',brushEndX).attr('width',width1-margin.left-brushEndX);
 	    //d3.select('#brushHandleL').attr('transform','translate('+brushStartX+',0)');
 	    //d3.select('#brushHandleR').attr('transform','translate('+brushEndX+',0)');
-
+	    gBrush.select('#zoomShadow').attr('points',brushStartX+',0 '+(brushEndX).toString()+',0 '+(width1-margin.left).toString()+',70 0,70');
    	
 	}
 	function brushended() {
